@@ -41,7 +41,7 @@ fn main() {
             ("C Z", 6 + 1),
         ],
     };
-    
+
     let results: HashMap<String, u64> = scores
         .iter()
         .map(|&(desc, score)| (desc.to_string(), score))
@@ -51,8 +51,7 @@ fn main() {
     for line in input_lines() {
         if line.is_empty() {
             eprintln!("empty line: unexpected, skipping");
-        }
-        else if results.contains_key(&line) {
+        } else if results.contains_key(&line) {
             points += results[&line];
         } else {
             eprintln!("unexpected line '{line}', skipping");
