@@ -18,16 +18,24 @@ fn outcome(opp: u32, me: u32) -> u32 {
     }
 }
 
+fn play(opp: u32, fix: u32) -> u32 {
+    match fix {
+        0 => (opp + 2) % 3,
+        1 => opp,
+        2 => (opp + 1) % 3,
+        _ => panic!("bad fix: {fix}"),
+    }
+}
+
 fn main() {
     let parser = Reparse::new(r"([ABC]) ([XYZ])");
-    let strategy = input_lines()
-        .map(|line| {
-            let parsed = parser.parse(&line).unwrap();
-            (
-                parsed.get::<char>(1) as u32 - 'A' as u32,
-                parsed.get::<char>(2) as u32 - 'X' as u32,
-            )
-        });
+    let strategy = input_lines().map(|line| {
+        let parsed = parser.parse(&line).unwrap();
+        (
+            parsed.get::<char>(1) as u32 - 'A' as u32,
+            parsed.get::<char>(2) as u32 - 'X' as u32,
+        )
+    });
     match get_part() {
         Part1 => {
             let score: u32 = strategy
@@ -35,6 +43,12 @@ fn main() {
                 .sum();
             println!("{score}");
         }
-        Part2 => todo!(),
+        Part2 => {
+            let score: u32 = strategy
+                .map(|(opp, fix)| (opp, play(opp, fix)))
+                .map(|(opp, me)| me + 1 + outcome(opp, me))
+                .sum();
+            println!("{score}");
+        }
     }
 }
