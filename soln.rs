@@ -10,6 +10,7 @@ use std::collections::HashMap;
 
 fn main() {
     let scores = match get_part() {
+        #[allow(clippy::identity_op)]
         Part1 => &[
             // A or X = rock
             // B or Y = paper
@@ -24,6 +25,7 @@ fn main() {
             ("C Y", 0 + 2),
             ("C Z", 3 + 3),
         ],
+        #[allow(clippy::identity_op)]
         Part2 => &[
             // A = rock, X = lose
             // B = paper, Y = tie
@@ -50,13 +52,10 @@ fn main() {
         if line.is_empty() {
             eprintln!("empty line: unexpected, skipping");
         }
-        else {
-            if results.contains_key(&line) {
-                points += results[&line];
-            }
-            else {
-                eprintln!("unexpected line '{line}', skipping");
-            }
+        else if results.contains_key(&line) {
+            points += results[&line];
+        } else {
+            eprintln!("unexpected line '{line}', skipping");
         }
     }
     println!("{points}");
