@@ -1,9 +1,16 @@
 # Advent of Code 2022: Day 2
-Bart Massey
+Ben and Bart Massey
 
 ---
 
-*Your notes here.*
+As with Day 1, we hassled around a bit with the input
+processing.
+
+We wrote separate solutions: the `main` branch contains
+Ben's, with a few of my modifications. It's a little "brute
+forcey" but very simple to understand if you get the math
+right. The branch `bart-soln` contains Bart's, which is a
+little cleaner but maybe less clear.
 
 ---
 
